@@ -5,15 +5,7 @@ Opens a server on 10.11.99.1:33333
 and sends all event data to the next client.
 '''
 
-import evdev
-from select import select
 import socket
-import struct
-
-wacomDev = evdev.InputDevice('/dev/input/event0')
-#print(wacomDev)
-
-# Credit to basic concept (I never used evdev): https://stackoverflow.com/a/12387122
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(('10.11.99.1', 33333))
@@ -23,11 +15,16 @@ while True:
 	print('Waiting for client...')
 	client, addr = server.accept()
 	print('Client connected')
+
+	# Start reading input from wacom digitizer:
+	wacomEvents = open('/dev/input/event0', 'rb')  # See rm.DebugWacomInput.py for more details
 	try:
+
+		# Send data while possible:
 		while True:
-			r,w,x = select([wacomDev], [], [])
-			for event in wacomDev.read():
-				#print(event.type, event.code, event.value)
-				client.send(struct.pack('HHi', event.type, event.code, event.value))
+			wacomEvents.read(8)  # Discard timestamp
+			client.send(wacomEvents.read(8))  # Format happens to be the exact same I used with struct			
+
 	except BrokenPipeError:
 		print('Client disconnected')
+		wacomEvents.close()  # Stop reading input from wacom digitizer
