@@ -6,7 +6,8 @@
 
 ---
 
-This (although it got mush easier) is till fairly complicated compared to [Evidlo](https://github.com/Evidlo)s [implementation](https://github.com/Evidlo/remarkable_mouse) that is a lot easier to use. **Please consider checking out his solution.**
+Thanks to [Evidlos implementation](https://github.com/Evidlo/remarkable_mouse) making it a lot easier to use. **Please also check out 
+his solution if you're interested in this software.**
 
 ---
 
