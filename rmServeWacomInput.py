@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 '''
 Meant to run on the reMarkable.
-Opens a server on 10.11.99.1:33333
+Opens a server on 10.11.99.1:33333 (or any wifi ip)
 and sends all event data to the next client.
 '''
 
 import socket
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind(('10.11.99.1', 33333))
+server.bind(('0.0.0.0', 33333))
 server.listen()
 
 while True:
