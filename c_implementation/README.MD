@@ -14,7 +14,7 @@ There are several options including:
 ## Compiling it on a RaspberryPi
 
 - Clone the Repository
-- Install these packages `gcc`, `make` and maybe `linux-headers`
+- Install the packages `gcc`, `make` and maybe `linux-headers`
 - Go into the `c_implementation` directory of this repo and run `make`
 - Copy the resulting file onto the reMarkable
 - Eventually stop the UI to prevent autosleep using `systemctl stop xochitl`

@@ -4,12 +4,18 @@
 
 [Demonstration here](https://youtu.be/R-BsDivpUQ0)
 
+---
+
+This (although it got mush easier) is till fairly complicated compared to [Evidlo](https://github.com/Evidlo)s [implementation](https://github.com/Evidlo/remarkable_mouse) that is a lot easier to use. **Please consider checking out his solution.**
+
+---
+
 ## Concept
 
 The basic concept:
 
 - A python script / c program reads the data of the wacom input (codes taken from [libremarkable](https://github.com/canselcik/libremarkable/blob/master/src/input/wacom.rs))
-- This script provides a server on port 33333 over usb (ip needs to be changed for using over wifi)
+- This script provides a server on port 33333 over usb and wifi
 - A client script on your pc reads the data from the server and acts accordingly.
 
 
@@ -31,14 +37,14 @@ The easiest one is using the precompiled c binary.
 
 - Download the latest binary called `rmServeWacomInput` (without any extension) [here](https://github.com/LinusCDE/rmWacomToMouse/releases).
 - Copy the binary to your reMarkable using scp, FileZilla, WinSCP or similar software.
-- Open an ssh session with the device (Putty can be used on windows).
+- Open a ssh session with the device (Putty can be used on windows).
 - Execute the binary with `./rmServeWacomInput`
-  - If that fails ensure you are in the correct directory or run `chmod +x rmServeWacomInput` and try again
+  - If that fails ensure you are in the correct directory or run `chmod +x rmServeWacomInput` and try running it again
 
 
 ### Using the python script
 - Copy the `rmServeWacomInput.py` file to the device using scp, FileZilla, WinSCP or similar software.
-- Open an ssh session with the device (Putty can be used on windows).
+- Open a ssh session with the device (Putty can be used on windows).
 - Install [the entware package manager for the reMarkable](https://github.com/Evidlo/remarkable_entware)
 - To use it run `export PATH="${PATH}:/opt/bin/:/opt/sbin/"` or put that into `~/.bashrc` to be permanent
 - Run `opkg install python3`
