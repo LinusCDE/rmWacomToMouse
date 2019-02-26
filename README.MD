@@ -20,21 +20,25 @@ The basic concept:
 - A client script on your pc reads the data from the server and acts accordingly.
 
 
+This repository contains two components:
+
+ - A server (on the reMarkable)
+   - Files that start with *rm*
+   - Has both a python as well as a c implementation
+- A client (on your computer)
+   - Files that start wiht *pc*
+
 
 ## Setting it up
 
-This script consists of two components: a server (on the reMarkable) and a client (on your computer)
-
-
-
-## Server
+### Server
 
 You can either run the python version, the precompiled c binary or [compile it yourself](https://github.com/LinusCDE/rmWacomToMouse/blob/master/c_implementation/README.MD).
 
 The easiest one is using the precompiled c binary.
 
 
-### Using the precompiled c binary
+#### Using the precompiled c binary
 
 - Download the latest binary called `rmServeWacomInput` (without any extension) [here](https://github.com/LinusCDE/rmWacomToMouse/releases).
 - Copy the binary to your reMarkable using scp, FileZilla, WinSCP or similar software.
@@ -43,7 +47,7 @@ The easiest one is using the precompiled c binary.
   - If that fails ensure you are in the correct directory or run `chmod +x rmServeWacomInput` and try running it again
 
 
-### Using the python script
+#### Using the python script
 - Copy the `rmServeWacomInput.py` file to the device using scp, FileZilla, WinSCP or similar software.
 - Open a ssh session with the device (Putty can be used on windows).
 - Install [the entware package manager for the reMarkable](https://github.com/Evidlo/remarkable_entware)
@@ -52,7 +56,7 @@ The easiest one is using the precompiled c binary.
 - Run the script using `python3 rmServeWacomInput.py` or just `./rmServeWacomInput.py`
 
 
-## Client
+### Client
 
 - Install python 3
 - Open a command prompt and run `pip3 install pynput`. If that fails try without the *3* in `pip3`.
@@ -63,7 +67,7 @@ The easiest one is using the precompiled c binary.
   - e.g. `python3 rmWacomToMouseTouchpad.py`
 
 
-### Configure
+## Configure
 
 Both scripts can be edited with most text editors (don't use notepad on windows).
 
