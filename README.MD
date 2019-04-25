@@ -4,7 +4,7 @@
 
 [Demonstration here](https://youtu.be/R-BsDivpUQ0)
 
-The linux tablet driver was [**moved here**](https://github.com/LinusCDE/rmLinuxTabletDriver).
+The linux tablet driver was [**moved here**](https://github.com/LinusCDE/rmTabletDriver).
 
 ---
 
