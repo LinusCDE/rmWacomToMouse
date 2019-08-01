@@ -110,8 +110,8 @@ while True:
 		if ONLY_DEBUG:
 			print('XPos: %5d | YPos: %5d | XTilt: %5d | YTilt: %5d | Distance: %3d | Pressure: %4d' % (lastXPos, lastYPos, lastXTilt, lastYTilt, lastDistance, lastPressure))
 		else:
-			screenX = SCREEN_DRAW_AREA_FROM_X + round(lastXPos * ratioX)                   # (X doesn't need to invert)
-			screenY = SCREEN_DRAW_AREA_FROM_Y + round((WACOM_HEIGHT - lastYPos) * ratioY)  # (Y has to be inverted)
+			screenX = SCREEN_DRAW_AREA_FROM_X + lastXPos * ratioX                 	# (X doesn't need to invert)
+			screenY = SCREEN_DRAW_AREA_FROM_Y + (WACOM_HEIGHT - lastYPos) * ratioY  # (Y has to be inverted)
 
 			current_measurement = np.array([[np.float32(screenX)], [np.float32(screenY)]])
 			current_prediction = kalman.predict()
