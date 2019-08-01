@@ -11,6 +11,9 @@ import socket
 import struct
 from pynput.mouse import Button, Controller
 
+from kalman_filter import KalmanFilter
+import numpy as np
+
 mouse = Controller()
 
 def mouseMoveAbs(x, y):
@@ -64,6 +67,22 @@ mouseButtonPressed = False
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(('10.11.99.1', 33333))
 
+# Source: https://github.com/DAA233/kalman-filter/
+stateMatrix = np.zeros((4, 1), np.float32)  # [x, y, delta_x, delta_y]
+estimateCovariance = np.eye(stateMatrix.shape[0])
+transitionMatrix = np.array([[1, 0, 1, 0],[0, 1, 0, 1], [0, 0, 1, 0], [0, 0, 0, 1]], np.float32)
+processNoiseCov = np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]], np.float32) * 0.001
+measurementStateMatrix = np.zeros((2, 1), np.float32)
+observationMatrix = np.array([[1,0,0,0],[0,1,0,0]],np.float32)
+measurementNoiseCov = np.array([[1,0],[0,1]], np.float32) * 1
+kalman = KalmanFilter(X=stateMatrix,
+                      P=estimateCovariance,
+                      F=transitionMatrix,
+                      Q=processNoiseCov,
+                      Z=measurementStateMatrix,
+                      H=observationMatrix,
+                      R=measurementNoiseCov)
+
 while True:
 	evDevType, evDevCode, evDevValue = struct.unpack('HHi', client.recv(8))
 	if evDevType == EV_ABS:
@@ -93,5 +112,14 @@ while True:
 		else:
 			screenX = SCREEN_DRAW_AREA_FROM_X + round(lastXPos * ratioX)                   # (X doesn't need to invert)
 			screenY = SCREEN_DRAW_AREA_FROM_Y + round((WACOM_HEIGHT - lastYPos) * ratioY)  # (Y has to be inverted)
-			mouseMoveAbs(screenX, screenY)
+
+			current_measurement = np.array([[np.float32(screenX)], [np.float32(screenY)]])
+			current_prediction = kalman.predict()
+
+			cmx, cmy = current_measurement[0], current_measurement[1]
+			cpx, cpy = current_prediction[0], current_prediction[1]
+
+			kalman.correct(current_measurement)
+
+			mouseMoveAbs(int(np.round(cpx)), int(np.round(cpy)))
 
