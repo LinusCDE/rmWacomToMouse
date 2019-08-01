@@ -113,13 +113,13 @@ while True:
 			screenX = SCREEN_DRAW_AREA_FROM_X + lastXPos * ratioX                 	# (X doesn't need to invert)
 			screenY = SCREEN_DRAW_AREA_FROM_Y + (WACOM_HEIGHT - lastYPos) * ratioY  # (Y has to be inverted)
 
-			current_measurement = np.array([[np.float32(screenX)], [np.float32(screenY)]])
-			current_prediction = kalman.predict()
+			currentMeasurement = np.array([[np.float32(screenX)], [np.float32(screenY)]])
+			currentPrediction = kalman.predict()
 
-			cmx, cmy = current_measurement[0], current_measurement[1]
-			cpx, cpy = current_prediction[0], current_prediction[1]
+			cmx, cmy = currentMeasurement[0], currentMeasurement[1]
+			cpx, cpy = currentPrediction[0], currentPrediction[1]
 
-			kalman.correct(current_measurement)
+			kalman.correct(currentMeasurement)
 
 			mouseMoveAbs(int(np.round(cpx)), int(np.round(cpy)))
 
