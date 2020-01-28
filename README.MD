@@ -1,5 +1,7 @@
 # rmWacomToMouse
 
+[![Mentioned in Awesome reMarkable](https://awesome.re/mentioned-badge.svg)](https://github.com/reHackable/awesome-reMarkable)
+
 **DISCLAIMER: PROCEED ON YOUR OWN RISK.**
 
 [Demonstration here](https://youtu.be/R-BsDivpUQ0)
