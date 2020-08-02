@@ -30,7 +30,7 @@ This repository contains two components:
    - Files that start with *rm*
    - Has both a python as well as a c implementation
 - A client (on your computer)
-   - Files that start wiht *pc*
+   - Files that start with *pc*
 
 
 ## Setting it up
