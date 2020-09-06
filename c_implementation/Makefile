@@ -1,3 +1,6 @@
+CC     ?= gcc
+CFLAGS ?=
+
 rebuild:
 	make clean build
 
@@ -5,4 +8,4 @@ clean:
 	rm -f rmServeWacomInput
 
 build:
-	gcc rmServeWacomInput.c -o rmServeWacomInput
+	$(CC) rmServeWacomInput.c -o rmServeWacomInput $(CFLAGS)
