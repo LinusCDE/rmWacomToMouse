@@ -33,6 +33,12 @@ struct rm_input_event {
 
 int main(int argc, char const *argv[])
 {
+    char event_file_name[32];
+    if(argc > 1) {
+        snprintf(event_file_name, sizeof(event_file_name), "/dev/input/event%s", argv[1]);
+    } else {
+        snprintf(event_file_name, sizeof(event_file_name), "/dev/input/event0");
+    }
 
     // Creating socket file descriptor
     int serverFd = socket(AF_INET, SOCK_STREAM, 0);
@@ -107,7 +113,7 @@ int main(int argc, char const *argv[])
 
 
         // Open file where input events for the wacom digitizer get received
-        FILE* wacomInputFp = fopen("/dev/input/event0", "r");
+        FILE* wacomInputFp = fopen(event_file_name, "r");
 
         if(wacomInputFp == NULL) {
             fprintf(stderr, "Failed to open wacom event file!\n");
