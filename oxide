@@ -1,5 +1,0 @@
-name=rmServeWacomInput
-desc=Open a server on port 33333 and serve pen input
-call=/opt/bin/appmarkable /opt/bin/rmservewacominput -n rmServeWacomInput -i /opt/etc/draft/icons/rmservewacominput.png
-term=:
-imgFile=rmservewacominput
