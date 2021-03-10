@@ -1,7 +1,7 @@
 # rmWacomToMouse
 
 [![rm1](https://img.shields.io/badge/rM1-supported-green)](https://remarkable.com/store/remarkable)
-[![rm2](https://img.shields.io/badge/rM2-wip-red)](https://remarkable.com/store/remarkable-2)
+[![rm2](https://img.shields.io/badge/rM2-supported-green)](https://remarkable.com/store/remarkable-2)
 [![opkg](https://img.shields.io/badge/OPKG-rmservewacominput-blue)](https://github.com/toltec-dev/toltec)
 [![launchers](https://img.shields.io/badge/Launchers-supported-green)](https://github.com/reHackable/awesome-reMarkable#launchers)
 [![Mentioned in Awesome reMarkable](https://awesome.re/mentioned-badge.svg)](https://github.com/reHackable/awesome-reMarkable)
@@ -15,7 +15,7 @@ The linux tablet driver was [**moved here**](https://github.com/LinusCDE/rmTable
 
 ---
 
-Thanks to [Evidlos implementation](https://github.com/Evidlo/remarkable_mouse) making it a lot easier to use. **Please also check out 
+Thanks to [Evidlos implementation](https://github.com/Evidlo/remarkable_mouse) making it a lot easier to use. **Please also check out
 his solution if you're interested in this software.**
 
 ---
