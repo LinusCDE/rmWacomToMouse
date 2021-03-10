@@ -31,13 +31,41 @@ struct rm_input_event {
 };
 
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
     char event_file_name[32];
-    if(argc > 1) {
+    if (argc > 1) {
         snprintf(event_file_name, sizeof(event_file_name), "/dev/input/event%s", argv[1]);
+        printf("Event file number was given. Using event file \"%s\" for pen input.\n", event_file_name);
     } else {
-        snprintf(event_file_name, sizeof(event_file_name), "/dev/input/event0");
+        // Read "/sys/class/devices/soc0/machine" to determine version and what file to use
+        // A better way would be to detect it through the evdev capabilities, but this is fewer
+        // lines and faster.
+        char machineContent[32]; // Store content of file here
+        // Ensure the string still will terminate with a null byte
+        memset((void*) machineContent, 0, sizeof(machineContent));
+        FILE* machineFp = fopen("/sys/devices/soc0/machine", "r");
+        size_t readBytes = fread((void *) machineContent, 1, sizeof(machineContent), machineFp);
+        if (readBytes < 0) {
+            perror("Failed to read \"/sys/devices/soc0/machine\"");
+            return 1;
+        }else if (readBytes == 32) {
+            fprintf(stderr, "Content of \"/sys/devices/soc0/machine\" is longer than expected!\n");
+            fprintf(stderr, "Please report the content of the above file to the developer.\n");
+            fprintf(stderr, "You can supply the correct event file number to bypass the problem for now.\n");
+            return 1;
+        }
+        if (strcmp(machineContent, "reMarkable 1.0\n") == 0 || strcmp(machineContent, "reMarkable Prototype 1\n") == 0) {
+            strcpy(event_file_name, "/dev/input/event0");
+            printf("Device seems to be a reMarkable 1. Using event file \"%s\" for pen input.\n", event_file_name);
+        }else if (strcmp(machineContent, "reMarkable 2.0\n") == 0) {
+            strcpy(event_file_name, "/dev/input/event1");
+            printf("Device seems to be a reMarkable 2. Using event file \"%s\" for pen input.\n", event_file_name);
+        }else {
+            fprintf(stderr, "Machine name was not recognized: \"%s\"\n", machineContent);
+            fprintf(stderr, "Please report the above machine name to the developer.\n");
+            fprintf(stderr, "You can supply the correct event file number to bypass the problem for now.\n");
+            return 1;
+        }
     }
 
     // Creating socket file descriptor
