@@ -72,8 +72,8 @@ The easiest one is using the precompiled c binary.
 - Clone/Download this repository
 - Go into the directory of this repository using your command prompt
 - Ensure the server is already running as described above
-- Run one of the files beginning with `rm` using `python3` or `python` in front and
-  - e.g. `python3 rmWacomToMouseTouchpad.py`
+- Run one of the files beginning with `pc` using `python3` or `python` in front
+  - e.g. `python3 pcWacomToMouseTouchpad.py`
 
 
 ## Configure
