@@ -13,7 +13,7 @@ from pynput.mouse import Button, Controller
 from sys import argv
 
 #from kalman_filter import KalmanFilter
-import numpy as np
+#import numpy as np
 
 mouse = Controller()
 
